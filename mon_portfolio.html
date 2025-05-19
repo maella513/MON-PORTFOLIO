@@ -1,59 +1,143 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Maella Ndzobou</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <header>
-        <h1>Maella Ndzobou</h1>
-        <p>Alternante Data Analyst - Passionnée de Machine Learning et Big Data</p>
-        <nav>
-            <ul>
-                <li><a href="#about">À propos</a></li>
-                <li><a href="#experience">Expériences</a></li>
-                <li><a href="#skills">Compétences</a></li>
-                <li><a href="#portfolio">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section id="about">
-        <h2>À propos de moi</h2>
-        <p>Étudiante en école d'ingénieur à l'ESEO, je suis passionnée par l'analyse de données, le Machine Learning et la programmation.</p>
-    </section>
-    
-    <section id="experience">
-        <h2>Expériences Professionnelles</h2>
-        <ul>
-            <li><strong>Assistante Data Scientist</strong> - Matrix Telecoms (2023) - Analyse et prédiction des tendances de consommation télécom.</li>
-            <li><strong>Assistante Data Analyst</strong> - CRTV (2023) - Étude des audiences télé et radio avec le Big Data.</li>
-            <li><strong>Assistante de Direction</strong> - Mairie de Baffoussam (2022) - Gestion administrative.</li>
-        </ul>
-    </section>
-    
-    <section id="skills">
-        <h2>Compétences</h2>
-        <ul>
-            <li>Programmation : Python, Java, C, SQL</li>
-            <li>Big Data : Apache Spark, Kafka</li>
-            <li>Data Visualization : Tableau, Power BI, Dash</li>
-            <li>Outils DevOps : Docker, Git, MLflow</li>
-        </ul>
-    </section>
-    
-    <section id="portfolio">
-        <h2>Projets</h2>
-        <p>Bientôt disponible...</p>
-    </section>
-    
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Email : <a href="mailto:maellamakoulo@gmail.com">maellamakoulo@gmail.com</a></p>
-        <p>LinkedIn : <a href="https://www.linkedin.com/in/maella%20ndzobou" target="_blank">Maella Ndzobou</a></p>
-    </section>
-</body>
-</html>
+import React from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Github, Linkedin } from "lucide-react";
+
+const skills = [
+  "Python",
+  "SQL",
+  "Java",
+  "C/C++",
+  "JavaScript",
+  "React",
+  "Docker",
+  "Power BI",
+  "Scikit‑learn",
+];
+
+const projects = [
+  {
+    title: "Site e‑commerce boulangerie",
+    desc:
+      "Site dynamique (HTML/CSS/JS/PHP) avec gestion de commandes en temps réel et interface d’admin.",
+  },
+  {
+    title: "Big Data Audiences Radio/TV",
+    desc:
+      "Pipeline Spark + MLflow, dashboards Power BI pour insights audience.",
+  },
+  {
+    title: "Jeu Java – Aventuriers du Rail",
+    desc: "Implémentation orientée objet complète avec IA basique.",
+  },
+];
+
+export default function Portfolio() {
+  return (
+    <main className="min-h-screen bg-bg text-text font-sans px-6 md:px-20 pb-20">
+      {/* Hero */}
+      <section className="flex flex-col items-center text-center pt-24 gap-6">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-6xl font-bold text-primary"
+        >
+          Maella Makoulo
+        </motion.h1>
+        <p className="max-w-xl text-lg text-muted">
+          Étudiante ingénieure à l’ESEO, passionnée de Data & IA. Recherche alternance
+          <strong> 2025–2027</strong>.
+        </p>
+        <div className="flex gap-4 pt-4">
+          <Button asChild variant="outline">
+            <a href="mailto:maellamakoulo@gmail.com">Contactez‑moi</a>
+          </Button>
+          <Button asChild variant="secondary">
+            <a href="/cv.pdf" target="_blank" rel="noopener noreferrer">
+              Télécharger CV
+            </a>
+          </Button>
+        </div>
+      </section>
+
+      {/* Skills */}
+      <section className="pt-24" id="skills">
+        <h2 className="text-3xl font-semibold text-primary mb-8 text-center">
+          Compétences
+        </h2>
+        <motion.ul
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 justify-items-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: { transition: { staggerChildren: 0.05 } },
+          }}
+        >
+          {skills.map((s) => (
+            <motion.li
+              key={s}
+              variants={{
+                hidden: { opacity: 0, y: 10 },
+                visible: { opacity: 1, y: 0 },
+              }}
+              className="bg-white shadow px-3 py-2 rounded-full text-sm"
+            >
+              {s}
+            </motion.li>
+          ))}
+        </motion.ul>
+      </section>
+
+      {/* Projects */}
+      <section className="pt-24" id="projects">
+        <h2 className="text-3xl font-semibold text-primary mb-12 text-center">
+          Projets sélectionnés
+        </h2>
+        <div className="grid gap-8 md:grid-cols-3">
+          {projects.map((p, idx) => (
+            <motion.div
+              key={idx}
+              whileHover={{ y: -6 }}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col"
+            >
+              <Card className="flex-1">
+                <CardContent className="p-6">
+                  <h3 className="font-medium text-lg mb-2">{p.title}</h3>
+                  <p className="text-sm text-muted leading-relaxed">{p.desc}</p>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section className="pt-24 text-center" id="contact">
+        <h2 className="text-3xl font-semibold text-primary mb-6">Restons en contact</h2>
+        <p className="text-muted mb-4">
+          Je suis ouverte aux opportunités d’alternance et de stage.
+        </p>
+        <div className="flex justify-center gap-6">
+          <a href="https://github.com/maella513" target="_blank" rel="noreferrer">
+            <Github className="w-6 h-6" />
+          </a>
+          <a
+            href="https://linkedin.com/in/maella-makoulo-a4171433a"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Linkedin className="w-6 h-6" />
+          </a>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+// Tailwind config suggestions (not part of component):
+// colors: { primary: "#5b21b6", bg: "#f9fafb", text: "#1f2937", muted: "#6b7280" }
+
